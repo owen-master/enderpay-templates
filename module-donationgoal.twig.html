@@ -1,0 +1,13 @@
+<div class="card mt-3 shadow" id="module_donationgoal">
+    <div class="card-header bg-primary text-light">
+        {{ module.name }}
+    </div>
+    <div class="card-body">
+        <div class="mx-auto d-block text-center">
+            <h5 class="text-center d-inline">{{ cart.currency.symbol ?? store.currency.symbol }} {{ module.data.revenue|number_format(2) }} / {{ module.data.goal|number_format(2) }} {{ cart.currency.iso4217 ?? store.currency.iso4217 }}</h5>
+        </div>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped {% if module.data.complete %}bg-success{% endif %} {% if module.data.animated %}progress-bar-animated{% endif %}" role="progressbar" style="width: {{ module.data.percentage }}%;"></div>
+        </div>
+    </div>
+</div>

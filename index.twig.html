@@ -1,0 +1,14 @@
+{% extends "base.twig.html" %}
+{% block title %} Home {% endblock title %}
+{% block content %}
+<div class="card my-3 shadow">
+    <div class="card-header bg-primary text-light">
+        {{ page.title }}
+    </div>
+    <div class="card-body">
+        {{ page.content | raw }}
+    </div>
+    <div class="card-footer">
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded mt-5 px-4">
+    <a class="navbar-brand" href="/">{{ store.name }}</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav">
+            {% for category in store.categories %}
+            {% if category.children %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="/{{ category.slug }}" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">{{ category.name }}</a>
+                <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
+                    {% for child in category.children %}
+                    <a class="dropdown-item" href="/{{ child.slug }}">{{ child.name }}</a>
+                    {% endfor %}
+                </div>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="/{{ category.slug }}">{{ category.name }}</a>
+            </li>
+            {% endif %}
+
+            {% endfor %}
+            {% if store.pages %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Pages</a>
+                <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
+                    {% for page in store.pages %}
+                    <a class="dropdown-item" href="/pages/{{ page.slug }}">{{ page.name }}</a>
+                    {% endfor %}
+                </div>
+            </li>
+            {% endif %}
+        </ul>
+        <ul class="navbar-nav ms-auto">
+            {% if cart %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">{{ cart.customer.username }}</a>
+                <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
+                    <a class="dropdown-item" href="/logout">Logout</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">{{ cart.currency.iso4217 }} ({{ cart.currency.symbol }})</a>
+                <div class="dropdown-menu" style="position: absolute; transform: translate3d(0px, 37px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
+                    {% for currency in store.currencies %}
+                    <a class="dropdown-item {% if cart.currency.iso4217 == currency.iso4217 %}active{% endif %}" href="?currency={{ currency.iso4217 }}">{{ currency.currency }} ({{ currency.symbol }})</a>
+                    {% endfor %}
+                </div>
+            </li>
+            <a class="nav-link" href="/cart/">Cart <span class="badge bg-light">{{ cart.packages|length }}</span></a>
+            <img class="ml-2 rounded border align-middle" width="37px" height="37px" src="https://cravatar.eu/avatar/{{ cart.customer.username }}/64.png" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ cart.customer.username }}">
+            {% else %}
+            <a class="nav-link" href="/login">Login</a>
+            <img class="ml-2 rounded border align-middle" width="37px" height="37px" src="https://cravatar.eu/avatar/steve/64.png" data-bs-toggle="tooltip" data-bs-placement="top" title="Guest">
+            {% endif %}
+        </ul>
+    </div>
+</nav>

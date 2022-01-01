@@ -1,0 +1,72 @@
+{% extends "base.twig.html" %}
+{% block title %} {{ category.name }} {% endblock title %}
+{% block content %}
+{% for package in category.packages %}
+<!-- Package Modal -->
+<div class="modal fade" id="package{{ package.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ package.name }} <small>({{ cart.currency.symbol }}{{ package.price|number_format(2) }} {% if package.originalPrice != package.price %} <del class="text-danger">{{ package.originalPrice|number_format(2) }}</del> {% endif %} {{ cart.currency.iso4217 }})</small></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ package.content | raw }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="/package/{{ package.id }}"><button type="button" class="btn btn-success">Buy</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Package Modal -->
+{% endfor %}
+<div class="card my-3 shadow">
+    <div class="card-header bg-primary text-light">
+        {{ category.name }}
+    </div>
+    <div class="card-body pb-0">
+        {{ category.content | raw }}
+        {% if category.viewMode == 'GRID' %}
+        <div class="row row-cols-1 row-cols-md-3">
+            {% for package in category.packages %}
+            <div class="col mb-4">
+                <div class="card shadow">
+                    <div class="card-header p-2 bg-primary text-light text-center">
+                        {{ package.name }}
+                        <small class="d-block text-center">{{ cart.currency.symbol }}{{ package.price|number_format(2) }} {% if package.originalPrice != package.price %} <del class="text-danger">{{ package.originalPrice|number_format(2) }}</del> {% endif %} {{ cart.currency.iso4217 }}</small>
+                    </div>
+                    <div class="card-body">
+                        {% if package.imageUrl %}
+                        <img class="container-fluid" src="{{ package.imageUrl }}" alt="{{ package.name }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ package.name }}">
+                        {% endif %}
+                    </div>
+                    <div class="card-footer p-2">
+                        <a href="/package/{{ package.id }}"><button type="button" class="btn btn-sm btn-success float-end">Buy</button></a>
+                        <button type="button" class="btn btn-primary btn-sm float-end mx-1" data-bs-toggle="modal" data-bs-target="#package{{ package.id }}">Info</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if category.viewMode == 'LIST' %}
+        <table class="table table-borderless table-striped table-hover thead-dark">
+            <tbody>
+            {% for package in category.packages %}
+            <tr>
+                <td class="align-middle" style="width: 50%">{{ package.name }}</td>
+                <td class="align-middle" style="width: 30%">{{ cart.currency.symbol }}{{ package.price|number_format(2) }} {% if package.originalPrice != package.price %} <del class="text-danger">{{ package.originalPrice|number_format(2) }}</del> {% endif %} {{ cart.currency.iso4217 }}</td>
+                <td class="align-middle" style="width: 20%"><button type="button" class="btn btn-primary btn-sm container-fluid" data-bs-toggle="modal" data-bs-target="#package{{ package.id }}">Info</button></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    <div class="card-footer">
+        <small>Displaying {{ category.packages|length }} package(s).</small>
+    </div>
+</div>
+{% endblock content %}

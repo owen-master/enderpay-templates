@@ -1,0 +1,65 @@
+{% extends "base.twig.html" %}
+{% block title %} Checkout {% endblock title %}
+{% block content %}
+<form action="" class="checkout" method="POST">
+    <input name="_token" value="{{ store.csrfToken }}" type="hidden">
+    <div class="card my-3 shadow">
+        <div class="card-header bg-primary text-light">
+            Checkout
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="m-0">Firstname <a class="text-danger text-decoration-none">*</a></label>
+                    <input type="text" class="form-control" name="first_name" id="input-firstname" placeholder="Firstname" minlength="1" maxlength="40" required>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="m-0">Lastname <a class="text-danger text-decoration-none">*</a></label>
+                    <input type="text" class="form-control" name="last_name" id="input-lastname" placeholder="Lastname" minlength="1" maxlength="40" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <label class="m-0">Email Address <a class="text-danger text-decoration-none">*</a></label>
+                    <input type="email" class="form-control" name="email_address" id="input-email" placeholder="example@example.com" minlength="3" maxlength="320" required>
+                </div>
+                <div class="form-group col-md-6 mb-3">
+                    <label class="m-0">Country <a class="text-danger text-decoration-none">*</a></label>
+                    <select class="form-select" name="country" id="input-country" required>
+                        {% for country in checkout.countries %}
+                            <option value="{{ country.id }}">{{ country.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {% if checkout.gateways is not empty %}
+            <div class="form-group mb-3">
+                <label class="m-0">Payment Gateway <a class="text-danger text-decoration-none">*</a></label>
+                {% for gateway in checkout.gateways %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gateway" value="{{ gateway.type }}">
+                    <label class="form-check-label" for="gateway">
+                        {{ gateway.name }}
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-danger m-0">There are no available payment gateways!</p>
+            {% endif %}
+            <div class="form-group">
+                <label class="m-0">Terms & Conditions <a class="text-danger text-decoration-none">*</a></label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="terms-enderpay" required>
+                    <label class="form-check-label" for="gridCheck">
+                        I agree to the <a href="https://enderpay.com/terms" target="_blank">Terms & Conditions</a> provided by <a href="https://enderpay.com">Enderpay</a>.
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-success" type="submit" id="button-proceed_to_payment">Proceed to payment</button>
+        </div>
+    </div>
+</form>
+{% endblock content %}

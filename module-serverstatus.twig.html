@@ -1,0 +1,15 @@
+<div class="card mt-3 shadow" id="module_serverstatus">
+    <form>
+        <div class="card-header bg-primary text-light">
+            {{ module.name }}
+        </div>
+        <div class="card-body">
+            <input type="hidden" id="server_address" value="{{ module.data.serverAddress }}">
+            <input type="hidden" id="server_port" value="{{ module.data.serverPort }}">
+            <div class="mx-auto d-block text-center" id="server_status">
+                <h5 class="text-center d-inline">{{ module.data.serverAddress }}{% if module.data.serverAddress %}:{{ module.data.serverPort }}{% endif %}</h5>
+            </div>
+            <p class="text-center mb-0" id="server_players"></p>
+        </div>
+    </form>
+</div>

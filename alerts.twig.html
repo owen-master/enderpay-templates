@@ -1,0 +1,5 @@
+{% for alert in store.alerts %}
+<div class="alert alert-dismissible alert-{{ alert.type }} mt-3 shadow">
+    <p class="mb-0">{{ alert.content }}</p>
+</div>
+{% endfor %}

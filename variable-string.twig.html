@@ -1,0 +1,9 @@
+<div class="card my-3 shadow">
+    <div class="card-header bg-primary text-light">
+        {{ variable.name }}
+    </div>
+    <div class="card-body">
+        {{ variable.content|raw }}
+        <input class="form-control" name="variables[{{ variable.id }}]" type="text" placeholder="{{ variable.name }}" minlength="{{ variable.min_length }}" maxlength="{{ variable.max_length }}"  required>
+    </div>
+</div>

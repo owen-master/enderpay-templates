@@ -1,0 +1,15 @@
+{% extends "base.twig.html" %}
+{% block title %} {{ page.name }} {% endblock title %}
+{% block content %}
+<div class="card my-3 shadow">
+    <div class="card-header bg-primary text-light">
+        {{ page.name }}
+    </div>
+    <div class="card-body">
+        {{ page.content | raw }}
+    </div>
+    <div class="card-footer">
+        {% if page.createdAt %} Created {{ page.createdAt }}. {% endif %} {% if page.updatedAt %} Updated {{ page.updatedAt }}. {% endif %}
+    </div>
+</div>
+{% endblock content %}

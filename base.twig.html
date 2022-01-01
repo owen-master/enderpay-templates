@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="The official donation website for {{ store.name }}.">
+        <meta name="author" content="">
+        <title>{{ store.name }} » {% block title %}{% endblock %}</title>
+
+        {% if store.faviconUrl %}<link rel="icon" href="{{ store.faviconUrl }}" type="image" />{% endif %}
+        <link rel="stylesheet" href="{{ store.themeUrl }}">
+    </head>
+
+    <body{% if store.backgroundUrl %} style="background-image: url('{{ store.backgroundUrl }}'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover"{% endif %}>
+
+    <!-- container -->
+    <div class="container my-2">
+
+        <!-- header -->
+        {% include 'header.twig.html' %}
+
+        <!-- navigation bar -->
+        {% include 'navbar.twig.html' %}
+
+        <!-- content -->
+        <div class="row">
+            <div class="{% if store.modules is not empty %}col-lg-8 col-xs-8{% else %}col-lg-12 col-xs-12{% endif%}">
+
+                <!-- content/notifications -->
+                {% include 'notifications.twig.html' %}
+
+                <!-- content/alerts -->
+                {% include 'alerts.twig.html' %}
+
+                <!-- content/page -->
+                {% block content %} {% endblock %}
+
+            </div>
+
+            {% if store.modules is not empty %}
+            <div class="col-lg-4 col-xs-4">
+                {% for module in store.modules %}
+                {% if module.type == 'CUSTOM_TEXT' %}
+                {% include 'module-customtext.twig.html' %}
+                {% endif %}
+                {% if module.type == 'YOUTUBE_VIDEO' %}
+                {% include 'module-youtubevideo.twig.html' %}
+                {% endif %}
+                {% if module.type == 'FEATURED_PACKAGE' %}
+                {% include 'module-featuredpackage.twig.html' %}
+                {% endif %}
+                {% if module.type == 'FEATURED_PLAYER' %}
+                {% include 'module-featuredplayer.twig.html' %}
+                {% endif %}
+                {% if module.type == 'RECENT_LOGINS'%}
+                {% include 'module-recentlogins.twig.html' %}
+                {% endif %}
+                {% if module.type == 'RECENT_PAYMENTS' %}
+                {% include 'module-recentpayments.twig.html' %}
+                {% endif %}
+                {% if module.type == 'GIFT_CARD_CREDIT' %}
+                {% include 'module-giftcardcredit.twig.html' %}
+                {% endif %}
+                {% if module.type == 'SERVER_STATUS'  %}
+                {% include 'module-serverstatus.twig.html' %}
+                {% endif %}
+                {% if module.type == 'TOP_DONATOR' %}
+                {% include 'module-topdonator.twig.html' %}
+                {% endif %}
+                {% if module.type == 'DONATION_GOAL' %}
+                {% include 'module-donationgoal.twig.html' %}
+                {% endif %}
+                {% if module.type == 'ONLINE_PLAYERS' %}
+                {% include 'module-onlineplayers.twig.html' %}
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- footer -->
+            {% include 'footer.twig.html' %}
+
+        </div>
+    </div>
+
+    <!-- javascript -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ store.jsUrl }}"></script>
+    {% block javascript %}
+    {% endblock %}
+    </body>
+</html>
