@@ -3,6 +3,7 @@
         {{ module.name }}
     </div>
     <div class="card-body p-0">
+        {% if module.data.logins is not empty %}
         <table class="table table-borderless table-striped mb-0">
             <tbody>
             {% for login in module.data.logins %}
@@ -15,5 +16,10 @@
             {% endfor %}
             </tbody>
         </table>
+        {% else %}
+        <div class="p-3 text-center">
+            <small>There are no recent logins to display.</small>
+        </div>
+        {% endif %}
     </div>
 </div>
