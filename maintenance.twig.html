@@ -1,54 +1,67 @@
-<style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The official donation website for {{ store.name }}.">
+    <meta name="author" content="">
+    <title>{{ store.name }} » Under Maintenance</title>
 
-    html, body{
-      margin: 0 auto;
-      font-family: 'Roboto', sans-serif;
-      height: 100%;
-      background: #EEEEF4;
-      font-weight: 100;
-      user-select: none;
-    }
+    {% if store.faviconUrl %}<link rel="icon" href="{{ store.faviconUrl }}" type="image" />{% endif %}
+    <link rel="stylesheet" href="{{ store.themeUrl }}">
+    <style>
 
-    main{
-      height: 100%;
-      display: flex;
-      margin: 0 20px; // To look nice on mobile
-      text-align: center;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      h1{
-        font-size: 3em;
-        font-weight: 100;
-        color: #F44;
-        margin: 0;
-      }
-      h2{
-        font-size: 1.5em;
-        font-weight: 100;
-        margin-bottom: 0;
-      }
-      h3{
-        font-size: 1.5em;
-        font-weight: 100;
-        margin-top: 0;
-      }
-      a{
-        font-size: 1.5em;
-        font-weight: 300;
-        color: #F44;
-        text-decoration: none;
-      }
-    }
+        html, body{
+          margin: 0 auto;
+          font-family: 'Roboto', sans-serif;
+          height: 100%;
+          background: #EEEEF4;
+          font-weight: 100;
+          user-select: none;
+        }
 
-    footer{
-      position: absolute;
-      bottom: 0;
-      margin: 10px;
-      font-weight: 300;
-    }
+        main{
+          height: 100%;
+          display: flex;
+          margin: 0 20px; // To look nice on mobile
+          text-align: center;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          h1{
+            font-size: 3em;
+            font-weight: 100;
+            color: #F44;
+            margin: 0;
+          }
+          h2{
+            font-size: 1.5em;
+            font-weight: 100;
+            margin-bottom: 0;
+          }
+          h3{
+            font-size: 1.5em;
+            font-weight: 100;
+            margin-top: 0;
+          }
+          a{
+            font-size: 1.5em;
+            font-weight: 300;
+            color: #F44;
+            text-decoration: none;
+          }
+        }
 
-</style>
+        footer{
+          position: absolute;
+          bottom: 0;
+          margin: 10px;
+          font-weight: 300;
+        }
+
+    </style>
+</head>
 <main>
   <svg xmlns="http://www.w3.org/2000/svg" width="100" height="70" viewBox="0 0 100 68">
     <g id="large">
@@ -63,3 +76,4 @@
   <h1>{{ store.name }} » Under Maintenance</h1>
   <h2>Sorry for the inconvenience.</h2>
 </main>
+</html>
