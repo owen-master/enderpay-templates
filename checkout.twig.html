@@ -1,6 +1,26 @@
 {% extends "base.twig.html" %}
 {% block title %} Checkout {% endblock title %}
 {% block content %}
+
+{% if store.termsAndConditions %}
+<!-- Terms and conditions modal -->
+<div class="modal fade" id="termsAndConditions" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Terms & Conditions</h5>
+            </div>
+            <div class="modal-body">
+                {{ store.termsAndConditions | raw }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <form action="" class="checkout" method="POST">
     <input name="_token" value="{{ store.csrfToken }}" type="hidden">
     <div class="card my-3 shadow">
@@ -49,6 +69,14 @@
             {% endif %}
             <div class="form-group">
                 <label class="m-0">Terms & Conditions <a class="text-danger text-decoration-none">*</a></label>
+                {% if store.termsAndConditions %}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="terms-store" required>
+                    <label class="form-check-label" for="gridCheck">
+                        I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsAndConditions">Terms & Conditions</a> provided by <a href="/"> {{ store.name }}</a>.
+                    </label>
+                </div>
+                {% endif %}
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="terms-enderpay" required>
                     <label class="form-check-label" for="gridCheck">
