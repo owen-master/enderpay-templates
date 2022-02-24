@@ -45,8 +45,13 @@
                 </div>
                 {% if cart.requiresDiscorcClientId %}
                 <div class="form-group col-md-6 mb-3">
-                    <label class="m-0">Discord Client ID <a class="text-danger text-decoration-none">* </a><a class="small" href="https://help.enderpay.com/customer-help/find-your-discord-client-id" target="_blank">(What's this?)</a></label>
-                    <input type="text" class="form-control" name="discord_client_id" id="input-discord-client-id" placeholder="Your Discord client ID" required>
+
+                    <label class="m-0">Discord Account <a class="text-danger text-decoration-none">* </a><a class="small" href="https://app.gitbook.com/s/-M7HXXrZ16Ih_OxXyvpd/customer-help/linking-discord-during-checkout" target="_blank">(What's this?)</a></label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="discord_client_id" id="input_discord_username" placeholder="N/A" aria-label=">Discord Account" aria-describedby="button-discord-login" disabled required>
+                        <input type="hidden" class="form-control" name="discord_client_id" id="input_discord_client_id" required>
+                        <button class="btn btn-primary" type="button" id="button_discord_login">Connect Discord</button>
+                    </div>
                 </div>
                 {% endif %}
                 <div class="form-group col-md-6 mb-3">
