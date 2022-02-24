@@ -4,7 +4,7 @@
 
 {% if store.termsAndConditions %}
 <!-- Terms and conditions modal -->
-<div class="modal fade" id="termsAndConditions" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="terms_and_conditions" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -31,17 +31,17 @@
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
                     <label class="m-0">Firstname <a class="text-danger text-decoration-none">*</a></label>
-                    <input type="text" class="form-control" name="first_name" id="input-firstname" placeholder="Firstname" minlength="1" maxlength="40" required>
+                    <input type="text" class="form-control" name="first_name" id="input_firstname" placeholder="Firstname" minlength="1" maxlength="40" required>
                 </div>
                 <div class="form-group col-md-6 mb-3">
                     <label class="m-0">Lastname <a class="text-danger text-decoration-none">*</a></label>
-                    <input type="text" class="form-control" name="last_name" id="input-lastname" placeholder="Lastname" minlength="1" maxlength="40" required>
+                    <input type="text" class="form-control" name="last_name" id="input_lastname" placeholder="Lastname" minlength="1" maxlength="40" required>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6 mb-3">
                     <label class="m-0">Email Address <a class="text-danger text-decoration-none">*</a></label>
-                    <input type="email" class="form-control" name="email_address" id="input-email" placeholder="example@example.com" minlength="3" maxlength="320" required>
+                    <input type="email" class="form-control" name="email_address" id="input_email" placeholder="example@example.com" minlength="3" maxlength="320" required>
                 </div>
                 {% if cart.requiresDiscorcClientId %}
                 <div class="form-group col-md-6 mb-3">
@@ -56,7 +56,7 @@
                 {% endif %}
                 <div class="form-group col-md-6 mb-3">
                     <label class="m-0">Country <a class="text-danger text-decoration-none">*</a></label>
-                    <select class="form-select" name="country" id="input-country" required>
+                    <select class="form-select" name="country" id="input_country" required>
                         {% for country in checkout.countries %}
                             <option value="{{ country.id }}">{{ country.name }}</option>
                         {% endfor %}
@@ -84,7 +84,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="terms-store" required>
                     <label class="form-check-label" for="gridCheck">
-                        I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsAndConditions">Terms & Conditions</a> provided by <a href="/"> {{ store.name }}</a>.
+                        I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#terms_and_conditions">Terms & Conditions</a> provided by <a href="/"> {{ store.name }}</a>.
                     </label>
                 </div>
                 {% endif %}
@@ -97,7 +97,7 @@
             </div>
         </div>
         <div class="card-footer">
-            <button class="btn btn-success" type="submit" id="button-proceed_to_payment">Proceed to payment</button>
+            <button class="btn btn-success" type="submit" id="button_proceed_to_payment">Proceed to payment</button>
         </div>
     </div>
 </form>
