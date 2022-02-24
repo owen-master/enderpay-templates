@@ -28,7 +28,7 @@
                             <div>
                                 <small>
                                     <a class="text-danger">SUBTOTAL:</a>
-                                    {{ cart.currency.symbol }}{{ package.subtotal }} {{ cart.currency.iso4217 }} {% if package.variableCount > 0 %} // {{ package.variableCount }} Variables {% endif %}
+                                    {{ cart.currency.symbol }}{{ package.subtotal|number_format(2) }} {{ cart.currency.iso4217 }} {% if package.variableCount > 0 %} // {{ package.variableCount }} Variables {% endif %}
                                 </small>
                             </div>
                         </th>
